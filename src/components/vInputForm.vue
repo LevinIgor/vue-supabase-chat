@@ -6,6 +6,12 @@ const props = defineProps({
   }
 })
 
+function sendMessage() {
+  if (props.modelValue.length === 0) return
+  emits('onSendMessage')
+  document.getElementById('message-input').textContent = ''
+}
+
 const emits = defineEmits(['update:modelValue', 'onSendMessage'])
 </script>
 <template>
@@ -19,13 +25,15 @@ const emits = defineEmits(['update:modelValue', 'onSendMessage'])
         placeholder="Type a message..."
         contenteditable
         wrap="hard"
-        @keypress.enter.exact.prevent="emits('onSendMessage'), ($event.target.textContent = '')"
+        @keypress.enter.exact.prevent="sendMessage"
         @input="emits('update:modelValue', $event.target.textContent)"
       ></span>
 
-      <div class="w-6 h-6 place-self-end ml-3 pb-10">
+      <div class="w-6 h-12 place-self-end ml-3 pb-10">
         <span
-          class="bg-primary-500 text-white material-symbols-outlined"
+          class="bg-primary-500 text-white material-symbols-outlined cursor-pointer rounded-full p-3"
+          id="send-button"
+          title="Send message"
           v-if="props.modelValue.length > 0"
           @click="sendMessage"
           >Send</span
@@ -54,5 +62,25 @@ span[contenteditable]:empty::before {
   z-index: -1;
 
   background: linear-gradient(180deg, rgba(#1a1a1a, 0), rgba(#1a1a1a, 100) 100%);
+}
+
+#send-button {
+  transition: background-color 0.2s;
+  animation: fadeIn 0.2s;
+
+  &:hover {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.099) 0%, rgba(255, 255, 255, 0) 100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 </style>

@@ -3,26 +3,35 @@ import { ref, onMounted } from 'vue'
 import vMessage from '@/components/vMessage.vue'
 import vInputForm from '@/components/vInputForm.vue'
 import { fetchMessages, createMessage, subscribeToMessages } from '@/api.js'
+import useStore from '@/stores'
 
 const message = ref('')
 const messages = ref([])
+const store = useStore()
 
 function sendMessage() {
   if (message.value.length === 0) return
 
-  createMessage({ text: message.value, author: 'Anonymous' })
+  createMessage({ text: message.value, author: store.getName() })
   message.value = ''
 }
 
 function playSound() {
-  const audio = new Audio('../../../public/sound/beep.mp3')
+  const audio = new Audio('/sound/beep.mp3')
   audio.volume = 0.01
   audio.play()
+}
+
+function scrollToBottom() {
+  setTimeout(() => {
+    window.scrollTo(0, document.body.scrollHeight)
+  })
 }
 
 onMounted(() => {
   fetchMessages().then((data) => {
     messages.value = data
+    scrollToBottom()
   })
 
   subscribeToMessages((obj) => {
