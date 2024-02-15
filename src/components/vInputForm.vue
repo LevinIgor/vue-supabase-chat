@@ -35,7 +35,7 @@ function update(e) {
     ></span>
     <span
       class="absolute bottom-2 right-4 font-thin text-sm"
-      :class="props.modelValue.length > maxlength ? 'text-red-400' : 'text-white'"
+      :class="props.modelValue.length > maxlength ? 'text-red-400' : 'text-zinc-500'"
       >{{ props.modelValue.length }} / {{ maxlength }}</span
     >
   </div>

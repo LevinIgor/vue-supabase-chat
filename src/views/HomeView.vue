@@ -55,7 +55,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="bg-neutral-950 overflow-y-visible w-full h-full relative content md:overflow-y-scroll md:-translate-x-1/2 md:-translate-y-1/2 md:h-5/6 md:aspect-3/4 md:w-auto md:absolute md:top-1/2 md:left-1/2"
+    class="rounded-3xl overflow-hidden bg-neutral-950 overflow-y-visible w-full h-full relative md:overflow-y-scroll md:-translate-x-1/2 md:-translate-y-1/2 md:h-5/6 md:aspect-3/4 md:w-auto md:absolute md:top-1/2 md:left-1/2"
     id="screen"
   >
     <div class="flex flex-col gap-4 px-3 pt-10 min-h-full">
@@ -73,17 +73,11 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.content {
+#screen {
   &::-webkit-scrollbar {
-    width: 0.5rem;
+    display: none;
   }
 
-  &::-webkit-scrollbar-thumb {
-    background-color: #1e1e1e;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #535353;
-  }
+  
 }
 </style>
