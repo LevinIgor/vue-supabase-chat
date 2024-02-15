@@ -17,14 +17,7 @@ Create a .env file with
 ## Setup your Supabase project
 The following database table is required:
 
-| Field      	| Type      	|
-|------------	|-----------	|
-| id         	| BIGINT    	|
-| author     	| TEXT      	|
-| text       	| TEXT      	|
-| country    	| TEXT      	|
-| created_at 	| timestamp 	|
-
+![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-15%20230744.png)
 ## Follow instrunction here
 
 ### Dev
@@ -35,3 +28,5 @@ The following database table is required:
 
 ### Demo
 **https://vue-chat-lovat.vercel.app/**
+
+![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-15%20230943.png)
