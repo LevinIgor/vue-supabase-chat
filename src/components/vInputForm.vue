@@ -25,7 +25,7 @@ function update(e) {
 <template>
   <div class="w-full bg-black-100 mt-52 form-input">
     <span
-      class="max-h-40 w-full block overflow-y-scroll text-lg pt-4 pb-5 px-3 bg-neutral-800 outline-none"
+      class="max-h-40 w-full block overflow-y-scroll text-lg pt-4 pb-5 px-3 bg-neutral-800 outline-none border-none"
       style="white-space: pre-wrap"
       role="textarea"
       id="message-input"
