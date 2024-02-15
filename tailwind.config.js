@@ -6,6 +6,9 @@ export default {
     extend: {
       colors: {
         'black-100': '#1a1a1a'
+      },
+      aspectRatio: {
+        '3/4': 3 / 4
       }
     }
   },

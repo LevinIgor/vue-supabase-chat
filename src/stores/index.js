@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export default defineStore('main', () => {
   const name = ref(0)
-  const country = ref('')
+  const country = ref('UA')
 
   function setName(newName) {
     name.value = newName

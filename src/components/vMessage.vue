@@ -1,4 +1,6 @@
 <script setup>
+import CountryFlag from 'vue-country-flag-next'
+
 import { useTimeAgo } from '@vueuse/core'
 import { ref } from 'vue'
 
@@ -19,13 +21,19 @@ const style = ref(
     ? 'ml-auto bg-neutral-800 text-left rounded-tr-3xl rounded-bl-3xl rounded-tl-3xl'
     : 'rounded-tr-3xl rounded-br-3xl rounded-tl-3xl bg-neutral-900'
 )
+
+
 </script>
 
 <template>
   <div class="py-6 px-3 flex flex-col w-5/6" :class="[style]">
-    <span class="font-medium">@{{ props.item.author }}</span>
+    <div class="">
+      <span class="font-medium">@{{ props.item.author }}</span>
+      <span class="ml-1 text-sm font-light">{{ props.item.country }} - </span>
+      <country-flag :country="props.item.country" size="small" />
+    </div>
     <p class="break-words pt-3 text-lg" style="white-space: pre-wrap">{{ props.item.text }}</p>
-    <span class="w-full text-right text-xs text-neutral-500">
+    <span class="w-full text-right text-xs text-neutral-500 select-none">
       {{ timeAgo }}
     </span>
   </div>

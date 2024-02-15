@@ -6,27 +6,38 @@ const props = defineProps({
   }
 })
 
+const emits = defineEmits(['update:modelValue', 'onSendMessage'])
+const maxlength = 500
+
 function sendMessage() {
-  if (props.modelValue.length === 0) return
+  const el = document.getElementById('message-input')
+  if (props.modelValue.length === 0 || el.textContent.length > maxlength) return
   emits('onSendMessage')
   document.getElementById('message-input').textContent = ''
 }
 
-const emits = defineEmits(['update:modelValue', 'onSendMessage'])
+function update(e) {
+  setTimeout(() => {
+    emits('update:modelValue', e.target.textContent)
+  })
+}
 </script>
 <template>
   <div class="w-full bg-black-100 mt-52 form-input">
     <span
-      class="max-h-40 w-full block overflow-y-scroll text-lg py-4 px-3 bg-neutral-800 outline-none"
-      style="white-space: pre"
+      class="max-h-40 w-full block overflow-y-scroll text-lg pt-4 pb-5 px-3 bg-neutral-800 outline-none"
+      style="white-space: pre-wrap"
       role="textarea"
       id="message-input"
-      placeholder="Type a message..."
       contenteditable
-      wrap="hard"
       @keypress.enter.exact.prevent="sendMessage"
-      @input="emits('update:modelValue', $event.target.textContent)"
+      @keydown="update"
     ></span>
+    <span
+      class="absolute bottom-2 right-4 font-thin text-sm"
+      :class="props.modelValue.length > maxlength ? 'text-red-400' : 'text-white'"
+      >{{ props.modelValue.length }} / {{ maxlength }}</span
+    >
   </div>
 </template>
 
@@ -39,17 +50,17 @@ span[contenteditable]:empty::before {
   content: 'Type a message...';
 }
 
-// .form-input::before {
-//   content: '';
-//   position: absolute;
-//   bottom: 100%;
-//   width: 100%;
-//   height: 100px;
-//   pointer-events: none;
-//   z-index: -1;
+.form-input::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  height: 100px;
+  pointer-events: none;
+  z-index: -1;
 
-//   background: linear-gradient(180deg, rgba(#1a1a1a, 0), rgba(#1a1a1a, 100) 100%);
-// }
+  background: linear-gradient(180deg, rgba(#1a1a1a, 0), rgba(#000000, 100) 100%);
+}
 
 #send-button {
   transition: background-color 0.2s;

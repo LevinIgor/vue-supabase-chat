@@ -1,13 +1,25 @@
 <script setup>
+import { onMounted } from 'vue'
 import useStore from '@/stores'
-
 const store = useStore()
+
+onMounted(() => {
+  const el = document.getElementById('name')
+
+  el.addEventListener('blur', () => {
+    if (el.textContent.length === 0) el.textContent = 'Anonymous'
+
+    store.setName(el.textContent)
+  })
+})
 </script>
 <template>
   <header class="fixed top-0 left-0 w-full p-3 bg-black-100 flex justify-center z-10">
     <div class="flex items-center justify-between w-full">
       <h2 class="text-green-600">Vue.js + Supabase Realtime = Chat</h2>
-      <span class="text-base font-medium cursor-pointer">{{ store.getName() }}</span>
+      <span class="text-base font-medium cursor-pointer whitespace-pre" contenteditable id="name">{{
+        store.getName()
+      }}</span>
     </div>
   </header>
 </template>

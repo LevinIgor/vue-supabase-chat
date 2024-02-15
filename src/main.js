@@ -1,7 +1,9 @@
 import './assets/base.css'
 import '@/index.css'
 import { createApp } from 'vue'
+
 import { createPinia } from 'pinia'
+
 import useStore from '@/stores'
 import getRandomName from '@/utils/getRandomName'
 import getLocationByIP from '@/utils/getLocationByIP'

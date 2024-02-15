@@ -7,8 +7,7 @@ export default async function getLocationByIP() {
       }
     )
     const data = await response.json()
-    console.log(data.country)
-    return data.country
+    return data.country.iso_code
   } catch (error) {
     console.error('Error getting location by IP:', error)
   }

@@ -1,10 +1,11 @@
 import supabase from '@/supabase'
 
-export async function fetchMessages() {
+export async function fetchMessages(page = 1) {
   const { data, error } = await supabase
     .from('message')
     .select('*')
-    .order('created_at', { ascending: true })
+    .order('created_at', { ascending: false })
+    .range((page - 1) * 10, page * 10 - 1)
 
   if (error) console.log('API - Fetch Message - Error: ', error)
 
@@ -25,5 +26,3 @@ export async function subscribeToMessages(callback) {
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'message' }, callback)
     .subscribe()
 }
-
-
