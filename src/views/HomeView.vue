@@ -42,12 +42,40 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="py-10 relative">
-    <div class="mb-52 flex flex-col gap-10">
-      <v-message v-for="item in messages" :key="item.id" :item="item" />
+  <div class="bg-neutral-950 content">
+    <div class="flex flex-col gap-4 px-3 pt-10">
+      <v-message
+        v-for="item in messages"
+        :key="item.id"
+        :item="item"
+        :is-user-message="Math.random() > 0.5"
+      />
     </div>
-    <v-input-form v-model="message" @on-send-message="sendMessage" />
+    <v-input-form class="sticky bottom-0" v-model="message" @on-send-message="sendMessage" />
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 80%;
+  aspect-ratio: 3/4;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #1e1e1e;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #535353;
+  }
+}
+</style>

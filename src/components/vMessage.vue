@@ -1,21 +1,29 @@
 <script setup>
 import { useTimeAgo } from '@vueuse/core'
+import { ref } from 'vue'
 
 const props = defineProps({
   item: {
     type: Object,
     required: true
+  },
+  isUserMessage: {
+    type: Boolean,
+    default: false
   }
 })
 
 const timeAgo = useTimeAgo(new Date(props.item.created_at))
+const style = ref(
+  props.isUserMessage
+    ? 'ml-auto bg-neutral-800 text-left rounded-tr-3xl rounded-bl-3xl rounded-tl-3xl'
+    : 'rounded-tr-3xl rounded-br-3xl rounded-tl-3xl bg-neutral-900'
+)
 </script>
 
 <template>
-  <div
-    class="bg-zinc-800 p-3 rounded-lg shadow-lg border border-zinc-700 border-solid flex flex-col"
-  >
-    <span class="font-medium">{{ props.item.author }}</span>
+  <div class="py-6 px-3 flex flex-col w-5/6" :class="[style]">
+    <span class="font-medium">@{{ props.item.author }}</span>
     <p class="break-words pt-3 text-lg" style="white-space: pre-wrap">{{ props.item.text }}</p>
     <span class="w-full text-right text-xs text-neutral-500">
       {{ timeAgo }}

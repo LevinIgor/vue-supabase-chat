@@ -1,6 +1,7 @@
 :root {
   --bg-main: #1a1a1a;
   --color-main: #c2c2c2;
+  --content-width: 900px;
 }
 
 *,
@@ -40,7 +41,7 @@ body::-webkit-scrollbar {
 }
 
 main {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

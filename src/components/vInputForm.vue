@@ -15,31 +15,18 @@ function sendMessage() {
 const emits = defineEmits(['update:modelValue', 'onSendMessage'])
 </script>
 <template>
-  <div class="fixed bottom-0 left-0 w-full bg-black-100 py-4 flex mt-52 form-input">
-    <div class="mx-auto w-full max-w-[900px] flex">
-      <span
-        class="max-h-40 w-full block overflow-y-scroll text-lg p-3 bg-neutral-800 border border-neutral-700 rounded-lg"
-        style="white-space: pre"
-        role="textarea"
-        id="message-input"
-        placeholder="Type a message..."
-        contenteditable
-        wrap="hard"
-        @keypress.enter.exact.prevent="sendMessage"
-        @input="emits('update:modelValue', $event.target.textContent)"
-      ></span>
-
-      <div class="w-6 h-12 place-self-end ml-3 pb-10">
-        <span
-          class="bg-primary-500 text-white material-symbols-outlined cursor-pointer rounded-full p-3"
-          id="send-button"
-          title="Send message"
-          v-if="props.modelValue.length > 0"
-          @click="sendMessage"
-          >Send</span
-        >
-      </div>
-    </div>
+  <div class="w-full bg-black-100 mt-52 form-input">
+    <span
+      class="max-h-40 w-full block overflow-y-scroll text-lg py-4 px-3 bg-neutral-800 outline-none"
+      style="white-space: pre"
+      role="textarea"
+      id="message-input"
+      placeholder="Type a message..."
+      contenteditable
+      wrap="hard"
+      @keypress.enter.exact.prevent="sendMessage"
+      @input="emits('update:modelValue', $event.target.textContent)"
+    ></span>
   </div>
 </template>
 
@@ -52,17 +39,17 @@ span[contenteditable]:empty::before {
   content: 'Type a message...';
 }
 
-.form-input::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  width: 100%;
-  height: 100px;
-  pointer-events: none;
-  z-index: -1;
+// .form-input::before {
+//   content: '';
+//   position: absolute;
+//   bottom: 100%;
+//   width: 100%;
+//   height: 100px;
+//   pointer-events: none;
+//   z-index: -1;
 
-  background: linear-gradient(180deg, rgba(#1a1a1a, 0), rgba(#1a1a1a, 100) 100%);
-}
+//   background: linear-gradient(180deg, rgba(#1a1a1a, 0), rgba(#1a1a1a, 100) 100%);
+// }
 
 #send-button {
   transition: background-color 0.2s;

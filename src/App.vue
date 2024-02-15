@@ -5,7 +5,7 @@ import vHeader from '@/components/vHeader.vue'
 <template>
   <main>
     <v-header />
-    <router-view class="my-20"/>
+    <router-view />
   </main>
 </template>
 
