@@ -54,7 +54,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-neutral-950 overflow-y-visible content" id="screen">
+  <div
+    class="bg-neutral-950 overflow-y-visible w-full h-full relative content md:overflow-y-scroll md:-translate-x-1/2 md:-translate-y-1/2 md:h-5/6 md:aspect-3/4 md:w-auto md:absolute md:top-1/2 md:left-1/2"
+    id="screen"
+  >
     <div class="flex flex-col gap-4 px-3 pt-10 min-h-full">
       <div class="h-10" id="intersection"></div>
       <v-message
@@ -71,15 +74,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  height: 80%;
-  aspect-ratio: 3/4;
-  overflow-y: scroll;
-
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
