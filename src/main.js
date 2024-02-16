@@ -24,3 +24,4 @@ store.setName(getRandomName())
 getLocationByIP().then((country) => {
   store.setCountry(country)
 })
+
