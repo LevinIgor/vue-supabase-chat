@@ -1,35 +1,32 @@
-# VueChat
+# Full-stack real-time chat
 
-This template should help get you started developing with Vue 3 in Vite.
+- Data: PostgeSQL managed by Supabase @supabase_io (awsome real-time API).
+- Front-end: Vue.js + Vite
+- UI library: Tailwind
+- Hosting: Vercel
+- Country flags from vue-country-flag-next
 
-## Recommended IDE Setup
+## Install
+**npm install** to setup dependencies
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Supabase variables
+Create a .env file with
+- VITE_SUPABASE_URL 
+- VITE_SUPABASE_KEY
 
-## Customize configuration
+## Setup your Supabase project
+The following database table is required:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-15%20230744.png)
+## Follow instrunction here
 
-## Project Setup
+### Dev
+**npm run dev** to run server on port 3000
 
-```sh
-npm install
-```
+### Build
+**npm run build** to build the react client
 
-### Compile and Hot-Reload for Development
+### Demo
+**https://vue-chat-lovat.vercel.app/**
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-15%20230943.png)
