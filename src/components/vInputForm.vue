@@ -25,7 +25,7 @@ function update(e) {
 <template>
   <div class="w-full bg-black-100 mt-52 form-input">
     <span
-      class="max-h-40 w-full block overflow-y-scroll text-lg pt-4 pb-5 px-3 bg-neutral-800 outline-none border-none"
+      class="max-h-40 w-full block overflow-y-scroll text-lg pt-4 pb-5 px-3 bg-neutral-800 outline-none border-none text-white text-opacity-70"
       style="white-space: pre-wrap"
       role="textarea"
       id="message-input"
@@ -60,25 +60,5 @@ span[contenteditable]:empty::before {
   z-index: -1;
 
   background: linear-gradient(180deg, rgba(#1a1a1a, 0), rgba(#000000, 100) 100%);
-}
-
-#send-button {
-  transition: background-color 0.2s;
-  animation: fadeIn 0.2s;
-
-  &:hover {
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.099) 0%, rgba(255, 255, 255, 0) 100%);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 </style>

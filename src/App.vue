@@ -3,10 +3,8 @@ import vHeader from '@/components/vHeader.vue'
 </script>
 
 <template>
-  <main>
-    <v-header />
-    <router-view />
-  </main>
+  <v-header />
+  <router-view />
 </template>
 
 <style scoped></style>
