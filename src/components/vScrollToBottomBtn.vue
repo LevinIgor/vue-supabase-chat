@@ -14,7 +14,7 @@ const props = defineProps({
       class="sticky bottom-24 w-min block ml-auto mr-5 p-3 rounded-full text-right cursor-pointer z-10 fill-slate-50 hover:bg-neutral-900 hover:fill-neutral-100 hover:shadow-lg"
       v-if="props.isVisible"
     >
-      <chevron-down-icon class="w-4 h-4" />
+      <chevron-down-icon class="" />
     </span>
   </Transition>
 </template>
