@@ -1,64 +1,67 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { fetchMessages, createMessage, subscribeToMessages } from '@/api.js'
+import { ref, onMounted, reactive, nextTick } from 'vue'
+import { fetchMessages, createMessage, subscribeToMessagesInsert } from '@/api.js'
 import vMessage from '@/components/vMessage.vue'
 import vInputForm from '@/components/vInputForm.vue'
 import vScrollToBottomBtn from '@/components/vScrollToBottomBtn.vue'
 import useStore from '@/stores'
 
+const store = useStore()
 const message = ref('')
 const messages = ref([])
-const store = useStore()
 const page = ref(1)
-const isNeedToScroll = ref(false)
+const isNeedScrollBottomBtn = ref(false)
+const listAnimationName = ref('list')
+const elements = reactive({
+  screen: null,
+  intersection: null
+})
 
 function sendMessage() {
-  if (message.value.length === 0) return
+  if (message.value.length === 0 || message.value.length > 1000) return
 
   createMessage({ text: message.value, author: store.getName(), country: store.getCountry() })
   message.value = ''
 }
 
 function scrollToBottom() {
-  const el = document.getElementById('screen')
-  setTimeout(() => el.scrollTo(0, el.scrollHeight))
-}
-
-function infinityScroll(entry) {
-  if (!entry.isIntersecting || messages.value.length == 0) return
-
-  const el = document.getElementById('screen')
-  const height = el.scrollHeight
-
-  fetchMessages(++page.value).then((data) => {
-    messages.value.unshift(...data.reverse())
-    setTimeout(() => document.getElementById('screen').scrollTo(0, el.scrollHeight - height))
-  })
+  nextTick(() => elements.screen.scrollTo(0, elements.screen.scrollHeight))
 }
 
 function scrollHandler(e) {
-  isNeedToScroll.value = e.target.scrollHeight - e.target.scrollTop > 1500
+  isNeedScrollBottomBtn.value = e.target.scrollHeight - e.target.scrollTop > 1500
 }
 
-onMounted(() => {
-  fetchMessages(page.value).then((data) => {
-    messages.value = data.reverse()
-    scrollToBottom()
+async function infinityScrollCallback([entry]) {
+  if (!entry.isIntersecting || messages.value.length == 0) return
+
+  listAnimationName.value = ''
+  messages.value.unshift(...(await fetchMessages(++page.value)).reverse())
+
+  const height = elements.screen.scrollHeight
+  nextTick(() => {
+    elements.screen.scrollTo(0, elements.screen.scrollHeight - height)
+    listAnimationName.value = 'list'
   })
+}
 
-  subscribeToMessages((obj) => {
-    messages.value.push(obj.new)
-  })
+function onMessageInsertCallback(obj) {
+  messages.value.push(obj.new)
+  if (obj.new.author === store.getName()) scrollToBottom()
+}
 
-  const observer = new IntersectionObserver((entries) => infinityScroll(entries[0]), {
-    threshold: 0.1,
-    rootMargin: '10px'
-  })
+onMounted(async () => {
+  elements.screen = document.getElementById('screen')
+  elements.intersection = document.getElementById('intersection')
 
-  observer.observe(document.querySelector('#intersection'))
+  messages.value = (await fetchMessages(page.value)).reverse()
+  scrollToBottom()
 
-  document.getElementById('screen').addEventListener('scroll', scrollHandler)
-  document.getElementById('screen').addEventListener('touch', scrollHandler)
+  subscribeToMessagesInsert(onMessageInsertCallback)
+
+  new IntersectionObserver(infinityScrollCallback).observe(elements.intersection)
+
+  elements.screen.addEventListener('scroll', scrollHandler)
 })
 </script>
 
@@ -69,14 +72,17 @@ onMounted(() => {
   >
     <div class="flex flex-col gap-4 px-3 pt-10 min-h-full">
       <div class="h-10" id="intersection"></div>
-      <v-message
-        v-for="item in messages"
-        :key="item.id"
-        :item="item"
-        :is-user-message="item.author === store.getName()"
-      />
+      <transition-group :name="listAnimationName">
+        <v-message
+          v-for="item in messages"
+          :key="item.id"
+          :item="item"
+          :is-user-message="item.author === store.getName()"
+        />
+      </transition-group>
     </div>
-    <v-scroll-to-bottom-btn :is-visible="isNeedToScroll" @click="scrollToBottom" />
+
+    <v-scroll-to-bottom-btn :is-visible="isNeedScrollBottomBtn" @click="scrollToBottom" />
     <v-input-form class="sticky bottom-0" v-model="message" @on-send-message="sendMessage" />
   </div>
 </template>
@@ -86,5 +92,23 @@ onMounted(() => {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
 }
 </style>
