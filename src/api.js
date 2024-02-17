@@ -20,7 +20,7 @@ export async function createMessage(message) {
   return error === null
 }
 
-export async function subscribeToMessages(callback) {
+export async function subscribeToMessagesInsert(callback) {
   supabase
     .channel('custom-insert-channel')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'message' }, callback)
