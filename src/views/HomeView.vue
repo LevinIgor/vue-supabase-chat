@@ -68,7 +68,7 @@ onMounted(async () => {
 
 <template>
   <main class="h-screen w-full flex flex-col justify-center items-center">
-    <div class="h-full md:h-4/5 md:aspect-3/4 grid grid-rows-10 md:gap-4 ">
+    <div class="h-full w-full md:w-auto md:h-4/5 md:aspect-3/4 grid grid-rows-10 md:gap-4">
       <div
         class="overflow-y-scroll overflow-x-hidden row-span-9 flex flex-col gap-3 px-3 pb-32 bg-neutral-950 md:rounded-tl-lg"
         id="screen"
