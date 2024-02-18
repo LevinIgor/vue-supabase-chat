@@ -68,9 +68,9 @@ onMounted(async () => {
 
 <template>
   <main class="h-screen w-full flex flex-col justify-center items-center">
-    <div class="h-full w-full md:w-auto md:h-4/5 md:aspect-3/4 grid grid-rows-10 md:gap-4">
+    <div class="h-full w-full md:w-auto md:h-4/5 md:aspect-3/4 md:grid grid-rows-10 md:gap-4">
       <div
-        class="overflow-y-scroll overflow-x-hidden row-span-9 flex flex-col gap-3 px-3 pb-32 bg-neutral-950 md:rounded-tl-lg"
+        class="md:overflow-y-scroll md:overflow-x-hidden row-span-9 flex flex-col gap-3 px-3 pb-32 bg-neutral-950 md:rounded-tl-lg"
         id="screen"
       >
         <div class="h-10" id="intersection"></div>
@@ -88,7 +88,11 @@ onMounted(async () => {
           @click="scrollToBottom(), (isNeedScrollBottomBtn = false)"
         />
       </div>
-      <v-input-form class="row-span-1" v-model="message" @on-send-message="sendMessage" />
+      <v-input-form
+        class="sticky bottom-0 md:relative row-span-1"
+        v-model="message"
+        @on-send-message="sendMessage"
+      />
     </div>
   </main>
 </template>
