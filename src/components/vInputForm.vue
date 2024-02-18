@@ -18,7 +18,7 @@ function sendMessage() {
   <div class="w-full bg-neutral-950 p-3 md:rounded-bl-lg md:rounded-br-lg">
     <form class="flex items-center gap-3" @submit.prevent="sendMessage">
       <input
-        class="w-full bg-neutral-900 text-neutral-100 p-3 rounded-lg"
+        class="w-full h-full bg-neutral-900 text-neutral-100 p-3 rounded-lg"
         type="text"
         placeholder="Type a message..."
         :maxlength="maxlength"
