@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export default defineStore('main', () => {
   const name = ref(0)
-  const country = ref('UA')
+  const user_location = ref('UA')
 
   function setName(newName) {
     name.value = newName
@@ -13,13 +13,18 @@ export default defineStore('main', () => {
     return name.value
   }
 
-  function setCountry(newCountry) {
-    country.value = newCountry
+  function setUserLocation(data) {
+    user_location.value = data
   }
 
   function getCountry() {
-    return country.value
+    console.log('getCountry', user_location.value.country.iso_code)
+    return user_location.value.country.iso_code
   }
 
-  return { setName, getName, setCountry, getCountry }
+  function getLocation() {
+    return user_location.value
+  }
+
+  return { setName, getName, getCountry, setUserLocation, getLocation }
 })

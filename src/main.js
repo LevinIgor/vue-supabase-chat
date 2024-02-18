@@ -21,7 +21,6 @@ app.mount('#app')
 const store = useStore()
 store.setName(getRandomName())
 
-getLocationByIP().then((country) => {
-  store.setCountry(country)
+getLocationByIP().then((geo) => {
+  store.setUserLocation(geo)
 })
-

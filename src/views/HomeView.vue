@@ -12,15 +12,19 @@ const messages = ref([])
 const page = ref(1)
 const isNeedScrollBottomBtn = ref(false)
 const listAnimationName = ref('list')
+
 const elements = reactive({
   screen: null,
   intersection: null
 })
 
 function sendMessage() {
-  if (message.value.length === 0 || message.value.length > 1000) return
-
-  createMessage({ text: message.value, author: store.getName(), country: store.getCountry() })
+  createMessage({
+    text: message.value,
+    author: store.getName(),
+    country: store.getCountry(),
+    location: store.getLocation()
+  })
   message.value = ''
 }
 
@@ -29,7 +33,7 @@ function scrollToBottom() {
 }
 
 function scrollHandler(e) {
-  isNeedScrollBottomBtn.value = e.target.scrollHeight - e.target.scrollTop > 1500
+  isNeedScrollBottomBtn.value = e.target.scrollHeight - e.target.scrollTop > 2000
 }
 
 async function infinityScrollCallback([entry]) {
@@ -45,56 +49,67 @@ async function infinityScrollCallback([entry]) {
   })
 }
 
+subscribeToMessagesInsert(onMessageInsertCallback)
 function onMessageInsertCallback(obj) {
   messages.value.push(obj.new)
   if (obj.new.author === store.getName()) scrollToBottom()
 }
 
+fetchMessages(page.value).then((data) => ((messages.value = data.reverse()), scrollToBottom()))
+
 onMounted(async () => {
   elements.screen = document.getElementById('screen')
   elements.intersection = document.getElementById('intersection')
 
-  messages.value = (await fetchMessages(page.value)).reverse()
-  scrollToBottom()
-
-  subscribeToMessagesInsert(onMessageInsertCallback)
-
   new IntersectionObserver(infinityScrollCallback).observe(elements.intersection)
-
   elements.screen.addEventListener('scroll', scrollHandler)
 })
 </script>
 
 <template>
-  <div
-    class="md:rounded-3xl md:overflow-hidden bg-neutral-950 overflow-y-visible w-full h-full relative shadow-lg md:overflow-y-scroll md:-translate-x-1/2 md:-translate-y-1/2 md:h-5/6 md:aspect-3/4 md:w-auto md:absolute md:top-1/2 md:left-1/2"
-    id="screen"
-  >
-    <div class="flex flex-col gap-4 px-3 pt-10 min-h-full">
-      <div class="h-10" id="intersection"></div>
-      <transition-group :name="listAnimationName">
-        <v-message
-          v-for="item in messages"
-          :key="item.id"
-          :item="item"
-          :is-user-message="item.author === store.getName()"
+  <main class="h-screen w-full flex flex-col justify-center items-center">
+    <div class="h-full md:h-4/5 md:aspect-3/4 grid grid-rows-10 md:gap-4 ">
+      <div
+        class="overflow-y-scroll overflow-x-hidden row-span-9 flex flex-col gap-3 px-3 pb-32 bg-neutral-950 md:rounded-tl-lg"
+        id="screen"
+      >
+        <div class="h-10" id="intersection"></div>
+        <transition-group :name="listAnimationName">
+          <v-message
+            v-for="item in messages"
+            :key="item.id"
+            :item="item"
+            :is-user-message="item.author === store.getName()"
+          />
+        </transition-group>
+        <v-scroll-to-bottom-btn
+          class="sticky -bottom-20 w-min ml-auto right-4 z-10 cursor-pointer"
+          :is-visible="isNeedScrollBottomBtn"
+          @click="scrollToBottom(), (isNeedScrollBottomBtn = false)"
         />
-      </transition-group>
+      </div>
+      <v-input-form class="row-span-1" v-model="message" @on-send-message="sendMessage" />
     </div>
-
-    <v-scroll-to-bottom-btn :is-visible="isNeedScrollBottomBtn" @click="scrollToBottom" />
-    <v-input-form class="sticky bottom-0" v-model="message" @on-send-message="sendMessage" />
-  </div>
+  </main>
 </template>
 
 <style lang="scss" scoped>
 #screen {
   &::-webkit-scrollbar {
-    display: none;
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #505050;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #bbbbbb;
+    border-radius: 0px;
   }
 }
 
-.list-move, /* apply transition to moving elements */
+.list-move,
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;
@@ -105,9 +120,6 @@ onMounted(async () => {
   opacity: 0;
   transform: translateX(100px);
 }
-
-/* ensure leaving items are taken out of layout flow so that moving
-   animations can be calculated correctly. */
 .list-leave-active {
   position: absolute;
 }
