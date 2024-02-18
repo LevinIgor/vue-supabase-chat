@@ -33,7 +33,7 @@ const style = ref(
       <span class="ml-1 text-sm font-light">{{ props.item.country }} - </span>
       <country-flag :country="props.item.country" size="small" />
     </div>
-    <p class="break-words pt-3 text-lg" style="white-space: pre-wrap">{{ props.item.text }}</p>
+    <p class="break-words pt-3 text-base" style="white-space: pre-wrap">{{ props.item.text }}</p>
     <span class="w-full text-right text-xs text-neutral-500 select-none mt-3">
       {{ timeAgo }}
     </span>

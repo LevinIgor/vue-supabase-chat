@@ -10,21 +10,28 @@ const props = defineProps({
 </script>
 <template>
   <Transition name="fade">
-    <span
-      class="sticky bottom-24 w-min block ml-auto mr-5 p-3 rounded-full text-right cursor-pointer z-10 fill-slate-50 hover:bg-neutral-900 hover:fill-neutral-100 hover:shadow-lg"
-      v-if="props.isVisible"
-    >
-      <chevron-down-icon class="" />
+    <span v-if="props.isVisible">
+      <chevron-down-icon class="p-2 box-content rounded-full" id="chevron-icon" />
     </span>
   </Transition>
 </template>
 
 <style lang="scss" scoped>
 .fade-enter-active {
-  transition: opacity 0.3s;
+  transition: opacity 0.6s;
 }
 
 .fade-enter-from {
   opacity: 0;
+}
+
+.fade-leave-active {
+  position: absolute;
+}
+
+#chevron-icon:hover {
+  transition: transform 0.3s;
+  transform: scale(1.1);
+  background-image: radial-gradient(circle, rgba(61, 61, 61, 0.596), transparent);
 }
 </style>

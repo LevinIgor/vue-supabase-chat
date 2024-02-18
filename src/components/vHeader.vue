@@ -1,18 +1,22 @@
 <script setup>
 import userIcon from '@/components/user-icon.vue'
 import useStore from '@/stores'
+import getRandomName from '@/utils/getRandomName'
 
 const store = useStore()
 </script>
 <template>
-  <header class="fixed top-0 left-0 w-full p-3 bg-black-100 flex justify-center z-10">
+  <header class="fixed top-0 left-0 w-full p-3 bg-black-100 flex justify-center z-10 select-none">
     <div class="flex items-center justify-between w-full">
       <h1 class="font-medium animate-charcter">Realtime Chat</h1>
 
       <div class="flex items-center gap-3">
-        <span class="text-base font-medium cursor-pointer whitespace-pre" id="name">{{
-          store.getName()
-        }}</span>
+        <span
+          class="text-base font-medium cursor-pointer whitespace-pre"
+          id="name"
+          @click="store.setName(getRandomName())"
+          >{{ store.getName() }}</span
+        >
         <user-icon class="w-5 h-5" />
       </div>
     </div>
