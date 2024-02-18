@@ -6,7 +6,9 @@ import getRandomName from '@/utils/getRandomName'
 const store = useStore()
 </script>
 <template>
-  <header class="fixed top-0 left-0 w-full p-3 bg-black-100 flex justify-center z-10 select-none">
+  <header
+    class="fixed top-0 left-0 w-full p-3 bg-black-100 flex justify-center z-10 select-none border-neutral-700 border-b"
+  >
     <div class="flex items-center justify-between w-full">
       <h1 class="font-medium animate-charcter">Realtime Chat</h1>
 
@@ -25,8 +27,6 @@ const store = useStore()
 
 <style lang="scss" scoped>
 header {
-  border-bottom: 1px solid #414141;
-
   div {
     max-width: var(--content-width);
   }

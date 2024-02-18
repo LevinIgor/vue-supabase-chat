@@ -25,16 +25,17 @@ const style = ref(
 
 <template>
   <div
-    class="pt-6 pb-3 px-3 flex flex-col w-5/6 border border-neutral-700 border-solid"
+    class="pt-4 pb-3 px-3 flex flex-col w-fit max-w-[90%] border border-neutral-700 border-solid"
     :class="style"
   >
     <div class="">
       <span class="font-medium">@{{ props.item.author }}</span>
+      <span class="text-xs"> from</span>
       <span class="ml-1 text-sm font-light">{{ props.item.country }} - </span>
       <country-flag :country="props.item.country" size="small" />
     </div>
     <p class="break-words pt-3 text-base" style="white-space: pre-wrap">{{ props.item.text }}</p>
-    <span class="w-full text-right text-xs text-neutral-500 select-none mt-3">
+    <span class="w-full text-right text-xs text-neutral-500 select-none mt-5">
       {{ timeAgo }}
     </span>
   </div>
