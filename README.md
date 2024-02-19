@@ -29,4 +29,4 @@ The following database table is required:
 ### Demo
 **https://vue-chat-lovat.vercel.app/**
 
-![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-15%20230943.png)
+![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-19%20180545.png)
