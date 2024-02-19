@@ -2,7 +2,6 @@
 import CountryFlag from 'vue-country-flag-next'
 
 import { useTimeAgo } from '@vueuse/core'
-import { ref } from 'vue'
 
 const props = defineProps({
   item: {
@@ -16,28 +15,30 @@ const props = defineProps({
 })
 
 const timeAgo = useTimeAgo(new Date(props.item.created_at))
-const style = ref(
-  props.isUserMessage
-    ? 'ml-auto bg-neutral-800 text-left rounded-tr-3xl rounded-bl-3xl rounded-tl-3xl'
-    : 'rounded-tr-3xl rounded-br-3xl rounded-tl-3xl bg-neutral-900'
-)
 </script>
 
 <template>
-  <div
-    class="pt-4 pb-3 px-3 flex flex-col w-fit max-w-[90%] border border-neutral-700 border-solid"
-    :class="style"
-  >
-    <div class="">
-      <span class="font-medium">@{{ props.item.author }}</span>
-      <span class="text-xs"> from</span>
-      <span class="ml-1 text-sm font-light">{{ props.item.country }} - </span>
-      <country-flag :country="props.item.country" size="small" />
+  <div class="w-full flex" :class="isUserMessage ? 'justify-end' : 'justify-start'">
+    <div class="px-3 flex flex-col w-fit max-w-[90%]">
+      <div class="" :class="{ 'text-right': isUserMessage }">
+        <span class="font-medium">@{{ props.item.author }}</span>
+        <span class="text-xs"> from</span>
+        <span class="ml-1 text-sm font-light">{{ props.item.country }} - </span>
+        <country-flag :country="props.item.country" size="small" />
+      </div>
+      <div class="flex items-end gap-3" :class="{ 'flex-row-reverse': props.isUserMessage }">
+        <p
+          class="break-words py-1 px-4 text-base bg-neutral-900 w-fit max-w-[80%] rounded-2xl mt-2"
+          :class="{ 'bg-opacity-90 ': props.isUserMessage }"
+          style="white-space: pre-wrap"
+        >
+          {{ props.item.text }}
+        </p>
+        <span class="text-xs text-neutral-500 select-none">
+          {{ timeAgo }}
+        </span>
+      </div>
     </div>
-    <p class="break-words pt-3 text-base" style="white-space: pre-wrap">{{ props.item.text }}</p>
-    <span class="w-full text-right text-xs text-neutral-500 select-none mt-5">
-      {{ timeAgo }}
-    </span>
   </div>
 </template>
 
