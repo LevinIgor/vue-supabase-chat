@@ -26,3 +26,7 @@ export async function subscribeToMessagesInsert(callback) {
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'message' }, callback)
     .subscribe()
 }
+
+export async function insertUser(user) {
+  await supabase.from('users').insert([{ location: user }])
+}

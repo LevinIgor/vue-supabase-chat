@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { insertUser as insertUserAsync } from '@/api'
 
 export default defineStore('main', () => {
   const name = ref(0)
@@ -15,6 +16,7 @@ export default defineStore('main', () => {
 
   function setUserLocation(data) {
     user_location.value = data
+    insertUserAsync(data)
   }
 
   function getCountry() {
