@@ -1,29 +1,34 @@
 <script setup>
 import sendIcon from '@/components/send-icon.vue'
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true
-  }
-})
+import { createMessage } from '@/api.js'
+import useStore from '@/store.js'
+import { ref } from 'vue'
 
-const emits = defineEmits(['update:modelValue', 'onSendMessage'])
+const message = ref('')
 const maxlength = 500
+const store = useStore()
 
 function sendMessage() {
-  if (props.modelValue.length < maxlength && props.modelValue.length > 0) emits('onSendMessage')
+  if (message.value.length < maxlength && message.value.length > 0) {
+    createMessage({
+      text: message.value,
+      author: store.getName(),
+      country: store.getCountry(),
+      location: store.getLocation()
+    })
+    message.value = ''
+  }
 }
 </script>
 <template>
-  <div class="w-full bg-neutral-950 p-3 md:rounded-bl-lg md:rounded-br-lg">
+  <div class="w-full bg-neutral-950 p-3 md:rounded-bl-lg md:rounded-br-lg" id="input-form">
     <form class="flex items-center gap-3" @submit.prevent="sendMessage">
       <input
         class="w-full h-full bg-neutral-900 text-neutral-100 p-3 rounded-lg"
         type="text"
         placeholder="Type a message..."
         :maxlength="maxlength"
-        :value="props.modelValue"
-        @input="emits('update:modelValue', $event.target.value.trim())"
+        v-model="message"
       />
       <send-icon
         class="cursor-pointer box-content rounded-full p-3"

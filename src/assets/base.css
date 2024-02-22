@@ -15,7 +15,7 @@
 }
 
 body {
-  height: 100dvh;
+  position: relative;
   color: var(--color-main);
   background: var(--bg-main);
   /* background-image: linear-gradient(360deg, #1d1d1d 0%, #1e1e1e 100%); */
@@ -31,6 +31,14 @@ body {
 
 body::-webkit-scrollbar {
   display: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
 }
 
 input {

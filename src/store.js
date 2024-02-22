@@ -20,7 +20,6 @@ export default defineStore('main', () => {
   }
 
   function getCountry() {
-    console.log('getCountry', user_location.value.country.iso_code)
     return user_location.value.country.iso_code
   }
 

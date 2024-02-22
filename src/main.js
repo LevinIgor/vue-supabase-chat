@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 
 import { createPinia } from 'pinia'
 
-import useStore from '@/stores'
+import useStore from '@/store'
 import getRandomName from '@/utils/getRandomName'
 import getLocationByIP from '@/utils/getLocationByIP'
 
