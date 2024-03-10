@@ -21,7 +21,7 @@ function sendMessage() {
 }
 </script>
 <template>
-  <div class="w-full bg-neutral-950 p-3 md:rounded-bl-lg md:rounded-br-lg" id="input-form">
+  <div class="w-full bg-neutral-950 p-3 md:rounded-b-lg" id="input-form">
     <form class="flex items-center gap-3" @submit.prevent="sendMessage">
       <input
         class="w-full h-full bg-neutral-900 text-neutral-100 p-3 rounded-lg"

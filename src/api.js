@@ -30,3 +30,5 @@ export async function subscribeToMessagesInsert(callback) {
 export async function insertUser(user) {
   await supabase.from('users').insert([{ location: user }])
 }
+
+

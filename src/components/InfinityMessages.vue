@@ -1,6 +1,7 @@
 <script setup>
 import vMessage from '@/components/vMessage.vue'
 import vScrollToBottomBtn from '@/components/vScrollToBottomBtn.vue'
+
 import { onMounted, ref, reactive, nextTick } from 'vue'
 import { fetchMessages, subscribeToMessagesInsert } from '@/api'
 import useStore from '@/store.js'
@@ -22,6 +23,7 @@ fetchMessages().then((data) => {
 
 subscribeToMessagesInsert((data) => {
   messages.value.push(data.new)
+  store.incrementProjectMessageCount()
 
   if (data.new.author == store.getName()) {
     scrollToBottom()
@@ -61,14 +63,23 @@ onMounted(() => {
   const headerHeight = document.getElementById('header').offsetHeight
   const footerHeight = document.getElementById('footer').offsetHeight
   const inputFormHeight = document.getElementById('input-form').offsetHeight
-  const contentHeight = windowHeight - headerHeight - footerHeight - inputFormHeight - marginY * 2
+  const messagesHeaderHeight = document.getElementById('messages-header').offsetHeight
+
+  const contentHeight =
+    windowHeight -
+    headerHeight -
+    footerHeight -
+    inputFormHeight -
+    messagesHeaderHeight -
+    marginY * 2
 
   elementsHTML.content.style.height = `${contentHeight}px`
 })
 </script>
+
 <template>
   <div
-    class="flex flex-col gap-3 bg-neutral-950 px-3 py-14 overflow-y-scroll relative"
+    class="flex flex-col gap-3 bg-neutral-950 px-3 py-14 relative overflow-y-scroll"
     id="infinity-comments"
   >
     <div class="h-10" id="intersection"></div>

@@ -1,12 +1,9 @@
 import './assets/base.css'
 import '@/index.css'
 import { createApp } from 'vue'
-
 import { createPinia } from 'pinia'
-
-import useStore from '@/store'
-import getRandomName from '@/utils/getRandomName'
-import getLocationByIP from '@/utils/getLocationByIP'
+import fetchAndSaveProjectStats from '@/utils/fetchProjectStats.js'
+import fetchAndSaveUserLocation from '@/utils/fetchUserLocation.js'
 
 import App from './App.vue'
 import router from './router'
@@ -18,9 +15,5 @@ app.use(router)
 
 app.mount('#app')
 
-const store = useStore()
-store.setName(getRandomName())
-
-getLocationByIP().then((geo) => {
-  store.setUserLocation(geo)
-})
+fetchAndSaveUserLocation()
+fetchAndSaveProjectStats()

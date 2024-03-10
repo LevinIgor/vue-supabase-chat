@@ -5,6 +5,7 @@ import { insertUser as insertUserAsync } from '@/api'
 export default defineStore('main', () => {
   const name = ref(0)
   const user_location = ref('UA')
+  const projectStats = ref({})
 
   function setName(newName) {
     name.value = newName
@@ -27,5 +28,27 @@ export default defineStore('main', () => {
     return user_location.value
   }
 
-  return { setName, getName, getCountry, setUserLocation, getLocation }
+  function setProjectStats(stats) {
+    projectStats.value = stats
+  }
+
+  function getProjectStats() {
+    return projectStats.value
+  }
+
+  function incrementProjectMessageCount() {
+    projectStats.value.message_count++
+  }
+
+  return {
+    setName,
+    getName,
+    getCountry,
+    setUserLocation,
+    getLocation,
+    setProjectStats,
+    getProjectStats,
+    projectStats,
+    incrementProjectMessageCount
+  }
 })
