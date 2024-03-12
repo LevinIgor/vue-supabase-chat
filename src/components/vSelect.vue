@@ -32,7 +32,7 @@ const toggleHandler = () => {
       />
     </div>
     <div
-      class="absolute right-0 top-0 translate-y-12 z-10 max-h-[200px] overflow-y-scroll bg-neutral-800 p-3 grid grid-cols-2 gap-2 w-[350px] dropdown shadow-neutral-800 shadow-md rounded-sm"
+      class="absolute right-0 top-0 translate-y-12 z-10 max-h-[200px] overflow-y-scroll bg-neutral-800 p-3 grid grid-cols-2 gap-2 w-[250px] md:w-[350px] dropdown shadow-neutral-800 shadow-md rounded-sm text-sm md:text-base"
       v-if="isOpen"
       ref="target"
     >

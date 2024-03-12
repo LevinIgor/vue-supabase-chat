@@ -6,7 +6,7 @@ export default async function fetchProjectStats() {
 
   const [counts, countryCount] = await Promise.all([getCounts(), getCountryCount()])
 
-  store.setProjectStats({ ...counts, countries: countryCount, online: 1 })
+  store.setProjectStats({ ...counts, countries: countryCount })
 }
 
 async function getCounts() {

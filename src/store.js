@@ -6,6 +6,7 @@ export default defineStore('main', () => {
   const name = ref(0)
   const user_location = ref('UA')
   const projectStats = ref({})
+  const online = ref(1)
 
   function setName(newName) {
     name.value = newName
@@ -32,12 +33,12 @@ export default defineStore('main', () => {
     projectStats.value = stats
   }
 
-  function getProjectStats() {
-    return projectStats.value
-  }
-
   function incrementProjectMessageCount() {
     projectStats.value.message_count++
+  }
+
+  function setOnlineNumber(num) {
+    online.value = num
   }
 
   return {
@@ -47,8 +48,9 @@ export default defineStore('main', () => {
     setUserLocation,
     getLocation,
     setProjectStats,
-    getProjectStats,
     projectStats,
-    incrementProjectMessageCount
+    incrementProjectMessageCount,
+    setOnlineNumber,
+    online
   }
 })

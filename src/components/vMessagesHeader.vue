@@ -11,6 +11,7 @@ import useStore from '@/store'
 const store = useStore()
 
 const stats = computed(() => store.projectStats)
+const online = computed(() => store.online)
 </script>
 <template>
   <div
@@ -19,7 +20,7 @@ const stats = computed(() => store.projectStats)
   >
     <div class="flex items-center gap-2 cursor-pointer" title="Online">
       <pulse-dot-icon />
-      <span class="text-green-500">{{ stats.online }}</span>
+      <span class="text-green-500">{{ online }}</span>
     </div>
     <div class="flex items-center gap-2 cursor-pointer" title="Messages count">
       <messages-icon />

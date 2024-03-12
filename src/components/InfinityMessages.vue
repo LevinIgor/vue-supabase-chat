@@ -9,7 +9,7 @@ import useStore from '@/store.js'
 const store = useStore()
 const page = ref(1)
 const windowHeight = window.innerHeight
-const marginY = windowHeight * 0.05
+const marginY = windowHeight * 0.04
 const isNeedToScrollBottom = ref(false)
 const elementsHTML = reactive({
   content: null,

@@ -1,5 +1,7 @@
 import './assets/base.css'
 import '@/index.css'
+import onlineHandler from '@/utils/onlineHandler.js'
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import fetchAndSaveProjectStats from '@/utils/fetchProjectStats.js'
@@ -17,3 +19,4 @@ app.mount('#app')
 
 fetchAndSaveUserLocation()
 fetchAndSaveProjectStats()
+onlineHandler()
