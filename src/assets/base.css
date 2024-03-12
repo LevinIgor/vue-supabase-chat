@@ -27,6 +27,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: linear-gradient(#1d1d1d 0.6px, transparent 0.6px),
+    linear-gradient(to right, #1d1d1d 0.6px, transparent 0.6px);
+  background-size: 12px 12px;
 }
 
 body::-webkit-scrollbar {

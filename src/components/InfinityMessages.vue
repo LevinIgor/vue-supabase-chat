@@ -128,5 +128,11 @@ onMounted(() => {
     background-color: #bbbbbb;
     border-radius: 0px;
   }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a0;
+  }
+
+  box-shadow: inset 0px 0px 10px 10px #000;
 }
 </style>
