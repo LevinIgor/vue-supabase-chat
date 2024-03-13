@@ -1,6 +1,6 @@
 # Full-stack real-time chat
 
-- Data: PostgeSQL managed by Supabase @supabase_io (awsome real-time API).
+- Data: PostgeSQL managed by Supabase @supabase_io (awesome real-time API).
 - Front-end: Vue.js + Vite
 - UI library: Tailwind
 - Hosting: Vercel
@@ -18,7 +18,7 @@ Create a .env file with
 The following database table is required:
 
 ![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-15%20230744.png)
-## Follow instrunction here
+## Follow instrution here
 
 ### Dev
 **npm run dev** to run server on port 3000
