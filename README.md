@@ -1,6 +1,6 @@
 # Full-stack real-time chat
 
-- Data: PostgeSQL managed by Supabase @supabase_io (awsome real-time API).
+- Data: PostgeSQL managed by Supabase @supabase_io (awesome real-time API).
 - Front-end: Vue.js + Vite
 - UI library: Tailwind
 - Hosting: Vercel
