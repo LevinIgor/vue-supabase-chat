@@ -18,7 +18,7 @@ Create a .env file with
 The following database table is required:
 
 ![image](https://cincccptobelmodposou.supabase.co/storage/v1/object/public/service/Screenshot%202024-02-15%20230744.png)
-## Follow instrution here
+## Follow instruction here
 
 ### Dev
 **npm run dev** to run server on port 3000
